@@ -1,33 +1,57 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# Xamarin Build/test output
+[Bb]in/
+[Oo]bj/
+test-results
+Components/*
+.DS_Store
 
-# Precompiled Headers
-*.gch
-*.pch
+#Autosave files
+*~
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# Build/test output
+obj
+bin
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# VS sometimes writes these for no apparent reason
+_UpgradeReport_Files
+UpgradeLog.*
 
-# Executables
-*.exe
-*.out
+# Per-user data
+*.DS_Store
+*.sln.cache
+*.suo
+*.userprefs
+*.usertasks
+*.user
+
+# ReSharper
+*_Resharper.*
+*.Resharper
+
+# dotCover
+*.dotCover
+
+
+#build
+packages/
+TestResults/
+Components/
+
+# globs
+Makefile.in
+*.cache
+*.pidb
+config.log
+config.make
+config.status
+aclocal.m4
+install-sh
+autom4te.cache/
+*.tar.gz
+tarballs/
+test-results/
+Thumbs.db
+
+#Mac bundle stuff
+*.dmg
 *.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
