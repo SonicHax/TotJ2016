@@ -46,9 +46,9 @@ namespace totj3.Droid
 
             btnNext.Click += delegate
             {
-                List<Model> list = CRUD.List("room", "?filter=name,eq," + nickName.Text);
-                Room room = (Room) list[0];
-                Console.WriteLine(room.name);
+                //List<Model> list = CRUD.List("room", "?filter=name,eq," + nickName.Text);
+                //Room room = (Room) list[0];
+                //Console.WriteLine(room.name);
 
                 //?filter=name,eq,abc,
                 //CRUD.Select("room", new Room(nickName, true, selectedPlayers, AccountState.playerID));
