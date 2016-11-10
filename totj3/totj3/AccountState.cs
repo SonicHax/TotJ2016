@@ -6,7 +6,11 @@ namespace totj3
 {
     public static class AccountState
     {
-        public static int playerID = 0, vehicleID = 0, vehicleOutside = 0, vehicleInside = 0, vehicleHat = 0;
-        public static string name;
+        public static int playerID;
+        public static string location;
+        public static string nickName;
+        public static int room;
+        public static int vehicle;
+        public static int hat;
     }
 }

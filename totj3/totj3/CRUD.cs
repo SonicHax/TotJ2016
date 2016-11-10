@@ -1,81 +1,141 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using totj3.Models;
 using RestSharp;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+
 namespace totj3
 {
+    /// <summary>
+    /// https://github.com/mevdschee/php-crud-api
+    /// https://github.com/mevdschee/php-crud-api#spatialgis-support
+    /// This class is build based on the PHP api on the link above.
+    /// </summary>
     public static class CRUD
     {
+        /// <summary>
+        /// This is the default session seed. This will later be implemented
+        /// in the calls so that you cannot just crawl around the website and
+        /// acces the API page for no reason.
+        /// </summary>
         public static string session = "DTHgirSnhfvHIBh0neUx";
 
-        public static string Create(string table, string columns, string values)
+        /// <summary>
+        /// This is the default RestClient. Used in every database related function.
+        /// </summary>
+        public static RestClient defaultClient;
+
+        /// <summary>
+        /// This is the default RestRequest. It is initiated here, but will be
+        /// redeclared in every function.
+        /// </summary>
+        public static RestRequest defaultRequest;  
+
+        /// <summary>
+        /// This is function to Get data from the database.
+        /// </summary>
+        /// <param name="table">The table you need to acces.</param>
+        /// <param name="id">The id you need data about.</param>
+        /// <returns>It returns a model from the database with the collected data</returns>
+        public static Model Select(string table, int id)
         {
-            var client = new RestClient();
-            client.BaseUrl = new Uri("http://94.213.168.52");
+            defaultRequest = new RestRequest(Method.GET);
+            defaultRequest.Resource = table + "/" + id + "/";
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/API/create.php";
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+            if(table == "player")
+            {
+                return JsonConvert.DeserializeObject<Player>(response.Content);
 
-            request.AddParameter("table", table);
-            request.AddParameter("columns", columns);
-            request.AddParameter("values", values);
-            request.AddParameter("auth", session);
-
-            IRestResponse response = client.Execute(request);
-            return response.Content;
+            } else if (table == "room")
+            {
+                return JsonConvert.DeserializeObject<Room>(response.Content);
+            }
+            return new Model();
         }
 
-        public static string Update(string table, string values, string where)
+        /// <summary>
+        /// This is function to Get data from the database in List format.
+        /// </summary>
+        /// <param name="table">The table you need to acces.</param>
+        /// <param name="id">The id you need data about.</param>
+        /// <returns></returns>
+        public static List<Room> List(string table, string filter)
         {
-            var client = new RestClient();
-            client.BaseUrl = new Uri("http://94.213.168.52");
+            /*
+            defaultRequest = new RestRequest(Method.GET);
+            defaultRequest.Resource = table + filter;
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/API/update.php";
+            defaultRequest.AddParameter("filter", filter);
 
-            request.AddParameter("table", table);
-            request.AddParameter("values", values);
-            request.AddParameter("where", where);
-            request.AddParameter("auth", session);
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+            */
+            string resp = "{'room':{'columns':['roomID','name','active','players','host'],'records':[['1','abc','0','3','1'],['2','abc','1','3','2']]}}";
+            var answer = JsonConvert.DeserializeObject<List<Model>>(resp); 
 
-            IRestResponse response = client.Execute(request);
-            return response.Content;
+            //http://94.213.168.52/API/api.php/room?filter[]=name,eq,abc
+            return JsonConvert.DeserializeObject<List<Room>>(resp);
         }
 
-        public static string Read(string what, string table, string where)
+
+        /// <summary>
+        /// This is the function to update data in the database.
+        /// </summary>
+        /// <param name="table">The table you need data from.</param>
+        /// <param name="id">The id you need to acces.</param>
+        /// <param name="o">The object that will be send to the database in Json format.</param>
+        /// <returns>Returns an int with the amount of affected rows</returns>
+        public static int Update(string table, int id, Model o)
         {
-            var client = new RestClient();
-            client.BaseUrl = new Uri("http://94.213.168.52");
+            defaultRequest = new RestRequest(Method.PUT);
+            defaultRequest.Resource = table + "/" + id + "/";
+            defaultRequest.AddJsonBody(o);
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/API/read.php";
+            IRestResponse response = defaultClient.Execute(defaultRequest);
 
-            request.AddParameter("what", what);
-            request.AddParameter("table", table);
-            request.AddParameter("where", where);
-            request.AddParameter("auth", session);
-
-            IRestResponse response = client.Execute(request);
-            return response.Content;
+            return JsonConvert.DeserializeObject<int>(response.Content);
         }
 
-        public static string ReadCheck(string what, string table, string where)
+        /// <summary>
+        /// This is the function to create a record in the database.
+        /// </summary>
+        /// <param name="table">The table you need data from.</param>
+        /// <param name="id">The id you need to acces.</param>
+        /// <param name="o">The object that will be send to the database in Json format.</param>
+        /// <returns>This returns the id of the created record</returns>
+        public static int Insert(string table, Model o)
         {
-            var client = new RestClient();
-            client.BaseUrl = new Uri("http://94.213.168.52");
+            defaultRequest = new RestRequest(Method.POST);
+            defaultRequest.Resource = table + "/";
+            defaultRequest.AddJsonBody(o);
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/API/read.php";
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+            return JsonConvert.DeserializeObject<int>("1");
+        }
 
-            request.AddParameter("what", what);
-            request.AddParameter("table", table);
-            request.AddParameter("where", where);
-            request.AddParameter("auth", session);
+        /// <summary>
+        /// This is the function to delete a record in the database.
+        /// </summary>
+        /// <param name="table">The table you need data from.</param>
+        /// <param name="id">The id you need to acces.</param>
+        /// <returns>Returns an int with the amount of affected rows</returns>
+        public static int Delete(string table, int id)
+        {
+            defaultRequest = new RestRequest(Method.DELETE);
+            defaultRequest.Resource = table + "/" + id + "/";
 
-            IRestResponse response = client.Execute(request);
-            return response.Content;
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+            return JsonConvert.DeserializeObject<int>(response.Content);
+        }
+
+        /// <summary>
+        /// This function set the default client. It is called upon in the 
+        /// Mainactivity at the start of the app.
+        /// </summary>
+        public static void setDefaultClient()
+        {
+            defaultClient = new RestClient();
+            defaultClient.BaseUrl = new Uri("http://94.213.168.52/API/api.php/");
         }
     }
 }

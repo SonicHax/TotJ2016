@@ -11,7 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CRUD.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Model.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Room.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoomState.cs" />
   </ItemGroup>
 </Project>

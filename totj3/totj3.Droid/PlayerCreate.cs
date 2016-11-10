@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using totj3.Models;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -18,43 +20,42 @@ namespace totj3.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.PlayerCreate);
+            SetContentView(Resource.Layout.Player);
 
-            Button btnSavePlayer = FindViewById<Button>(Resource.Id.button1);
+            Button btnNext = FindViewById<Button>(Resource.Id.Player_btn_Next);
 
-            btnSavePlayer.Click += delegate
+            string nickName;
+            int vehicle = 1;
+            int hat = 1;
+            
+            btnNext.Click += delegate
             {
-                EditText editTextNickName = FindViewById<EditText>(Resource.Id.editNickname);
-                EditText editTextHat = FindViewById<EditText>(Resource.Id.editTextHat);
-                EditText editTextOutside= FindViewById<EditText>(Resource.Id.editTextOutside);
-                EditText editTextInside = FindViewById<EditText>(Resource.Id.editTextInside);
+                nickName = FindViewById<EditText>(Resource.Id.Player_et_Nickname).Text;
 
-                if (editTextNickName.Text.Length > 0 &&
-                editTextHat.Text.Length > 0 &&
-                editTextOutside.Text.Length > 0 &&
-                editTextInside.Text.Length > 0)
-                {
-                    btnSavePlayer.Clickable = false;
-                    string playerAddSucces = CRUD.Create("player", "nickName, outside, inside, hat", "'" + editTextNickName.Text + "'," + editTextOutside.Text + "," + editTextInside.Text + "," + editTextHat.Text);
-                    int.TryParse(playerAddSucces, out AccountState.playerID);
-                    if(AccountState.playerID > 0)
-                    {
-                        AccountState.name = editTextNickName.Text;
-                        int.TryParse(editTextInside.Text, out AccountState.vehicleInside);
-                        int.TryParse(editTextOutside.Text, out AccountState.vehicleOutside);
-                        int.TryParse(editTextHat.Text, out AccountState.vehicleHat);
-                        StartActivity(typeof(Start));
-                    }
-                    else
-                    {
-                        btnSavePlayer.Clickable = true;
-                    }
-                }
+                Player player = new Player(nickName, vehicle, hat);
+
+                player.playerID = CRUD.Insert("player", player);
+
+                player.PlayerToPlayerState();
+
+                StartActivity(typeof(RoomHost));
+
             };
 
+            RadioButton radioHat1 = FindViewById<RadioButton>(Resource.Id.Player_radio_hat1);
+            radioHat1.Click += delegate { hat = 1; };
+            RadioButton radioHat2 = FindViewById<RadioButton>(Resource.Id.Player_radio_hat2);
+            radioHat2.Click += delegate { hat = 2; };
+            RadioButton radioHat3 = FindViewById<RadioButton>(Resource.Id.Player_radio_hat3);
+            radioHat3.Click += delegate { hat = 3; };
 
+            RadioButton radioVehicle1 = FindViewById<RadioButton>(Resource.Id.Player_radio_vehicle1);
+            radioVehicle1.Click += delegate { hat = 1; };
+            RadioButton radioVehicle2 = FindViewById<RadioButton>(Resource.Id.Player_radio_vehicle2);
+            radioVehicle2.Click += delegate { hat = 2; };
+            RadioButton radioVehicle3 = FindViewById<RadioButton>(Resource.Id.Player_radio_vehicle3);
+            radioVehicle3.Click += delegate { hat = 3; };
         }
     }
 }

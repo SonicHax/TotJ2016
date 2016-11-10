@@ -16,21 +16,11 @@ namespace totj3.Droid
         {
             base.OnCreate(bundle);
 
+            CRUD.setDefaultClient();
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            
-            Button btnPlay = FindViewById<Button>(Resource.Id.button1);
 
-            btnPlay.Click += delegate
-            {
-                if(AccountState.playerID == 0)
-                {
-                    StartActivity(typeof(PlayerCreate));
-                }
-                else
-                {
-                    StartActivity(typeof(Start));
-                }};
+            StartActivity(typeof(Start));
         }
 	}
 }
