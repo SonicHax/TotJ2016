@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LobbyHost.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PlayerCreate.cs" />
@@ -76,6 +77,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Player.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LobbyHost.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -60,21 +60,25 @@ namespace totj3
         /// <param name="table">The table you need to acces.</param>
         /// <param name="id">The id you need data about.</param>
         /// <returns></returns>
-        public static List<Room> List(string table, string filter)
+        public static Model List(string table)
         {
-            /*
             defaultRequest = new RestRequest(Method.GET);
-            defaultRequest.Resource = table + filter;
+            defaultRequest.Resource = table;
 
-            defaultRequest.AddParameter("filter", filter);
+            defaultRequest.AddParameter("transform", 1);
 
             IRestResponse response = defaultClient.Execute(defaultRequest);
-            */
-            string resp = "{'room':{'columns':['roomID','name','active','players','host'],'records':[['1','abc','0','3','1'],['2','abc','1','3','2']]}}";
-            var answer = JsonConvert.DeserializeObject<List<Model>>(resp); 
+            if (table == "player")
+            {
+                return JsonConvert.DeserializeObject<Player>(response.Content);
+            }
+            else if (table == "room")
+            {
+                return JsonConvert.DeserializeObject<Room>(response.Content);
+            }
+            return new Model();
 
             //http://94.213.168.52/API/api.php/room?filter[]=name,eq,abc
-            return JsonConvert.DeserializeObject<List<Room>>(resp);
         }
 
 

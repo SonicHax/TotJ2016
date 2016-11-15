@@ -11,6 +11,7 @@ namespace totj3.Models
         public bool active;
         public int players;
         public int host;
+        public Room[] room;
 
         public Room(string n, bool a, int p, int h){
             this.name = n;
