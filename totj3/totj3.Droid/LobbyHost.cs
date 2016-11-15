@@ -20,15 +20,16 @@ namespace totj3.Droid
             base.OnCreate(savedInstanceState);
 
             // Create your application here
+            SetContentView(Resource.Layout.LobbyHost);
 
             Button btnStart = FindViewById<Button>(Resource.Id.LobbyHost_btn_Start);
             Button btnStop = FindViewById<Button>(Resource.Id.LobbyHost_btn_Stop);
 
-            TextView roomName = FindViewById<Button>(Resource.Id.LobbyHost_text_RoomName);
-            TextView player1 = FindViewById<Button>(Resource.Id.LobbyHost_text_p1);
-            TextView player2 = FindViewById<Button>(Resource.Id.LobbyHost_text_p2);
-            TextView player3 = FindViewById<Button>(Resource.Id.LobbyHost_text_p3);
-            TextView player4 = FindViewById<Button>(Resource.Id.LobbyHost_text_p4);
+            TextView roomName = FindViewById<TextView>(Resource.Id.LobbyHost_text_RoomName);
+            TextView player1 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p1);
+            TextView player2 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p2);
+            TextView player3 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p3);
+            TextView player4 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p4);
 
             int currentPlayers = 1;
 
@@ -53,12 +54,12 @@ namespace totj3.Droid
 
             btnStop.Click += delegate
             {
-                CRUD.Delete("room", RoomState.roomID);
-
                 RoomState.p1.room = 0;
                 RoomState.p2.room = 0;
                 RoomState.p3.room = 0;
                 RoomState.p4.room = 0;
+
+                CRUD.Delete("room", RoomState.roomID);
 
                 CRUD.Update("player", RoomState.p1.playerID, RoomState.p1);
                 CRUD.Update("player", RoomState.p2.playerID, RoomState.p2);

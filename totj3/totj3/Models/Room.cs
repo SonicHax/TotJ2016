@@ -8,12 +8,12 @@ namespace totj3.Models
     {
         public int roomID;
         public string name;
-        public bool active;
+        public string active;
         public int players;
         public int host;
         public Room[] room;
 
-        public Room(string n, bool a, int p, int h){
+        public Room(string n, string a, int p, int h){
             this.name = n;
             this.active = a;
             this.players = p;

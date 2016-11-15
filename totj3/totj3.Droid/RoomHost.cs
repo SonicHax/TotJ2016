@@ -44,6 +44,7 @@ namespace totj3.Droid
             Button btnNext = FindViewById<Button>(Resource.Id.RoomHost_btn_Next);
             EditText nickName = FindViewById<EditText>(Resource.Id.RoomHost_et_RoomName);
             TextView error = FindViewById<TextView>(Resource.Id.RoomHost_text_error);
+            bool createRoom = true;
 
             btnNext.Click += delegate
             {
@@ -51,21 +52,25 @@ namespace totj3.Droid
                 // Check if name already exists in rooms
                 foreach (Room room in rooms.room)
                 {
-                    if (room.name == nickName.Text && room.active == true)
+                    if (room.name == nickName.Text && room.active == "true")
                     {
                         error.Text = "Deze kamernaam is al ingebruik";
-                    } else
-                    {
-                        CRUD.Insert("room", new Room(nickName.Text, true, selectedPlayers, AccountState.playerID));
-                        room.RoomToRoomState();
-                    }
-                    if(room.active == false)
+                        createRoom = false;
+                    } 
+                    if(room.active == "false")
                     {
                         CRUD.Delete("room", room.roomID);
                     }
-                    
                 }
-                
+                if(createRoom == true)
+                {
+                    Room room = new Room(nickName.Text, "true", selectedPlayers, AccountState.playerID);
+                    room.roomID = CRUD.Insert("room", room);
+                    room.RoomToRoomState();
+                    StartActivity(typeof(LobbyHost));
+                }
+                createRoom = true;
+
             };
 
 
