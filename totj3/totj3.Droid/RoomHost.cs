@@ -65,8 +65,10 @@ namespace totj3.Droid
                 if(createRoom == true)
                 {
                     Room room = new Room(nickName.Text, "true", selectedPlayers, AccountState.playerID);
-                    room.roomID = CRUD.Insert("room", room);
+                    /*room.roomID = CRUD.Insert("room", room);
                     room.RoomToRoomState();
+                    AccountState.room = room.roomID;
+                    CRUD.Update("player", AccountState.playerID, new Player());*/
                     StartActivity(typeof(LobbyHost));
                 }
                 createRoom = true;

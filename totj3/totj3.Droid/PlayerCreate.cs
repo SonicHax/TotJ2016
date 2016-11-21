@@ -35,7 +35,8 @@ namespace totj3.Droid
 
                 Player player = new Player(nickName, vehicle, hat);
 
-                player.playerID = CRUD.Insert("player", player);
+                CRUD.Insert("player", player);
+                player.playerID = CRUD.getMaxID("player", "playerID");
 
                 player.PlayerToPlayerState();
 

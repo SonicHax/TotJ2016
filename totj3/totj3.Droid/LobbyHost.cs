@@ -54,7 +54,7 @@ namespace totj3.Droid
 
             btnStop.Click += delegate
             {
-                RoomState.p1.room = 0;
+                /*RoomState.p1.room = 0;
                 RoomState.p2.room = 0;
                 RoomState.p3.room = 0;
                 RoomState.p4.room = 0;
@@ -66,7 +66,7 @@ namespace totj3.Droid
                 CRUD.Update("player", RoomState.p3.playerID, RoomState.p3);
                 CRUD.Update("player", RoomState.p4.playerID, RoomState.p4);
 
-                StartActivity(typeof(Main));
+                StartActivity(typeof(Main));*/
             };
         }
         

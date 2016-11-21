@@ -9,7 +9,7 @@ namespace totj3.Models
         public int playerID;
         public string location;
         public string nickName;
-        public int room;
+        public int roomID;
         public int vehicle;
         public int hat;
 
@@ -25,7 +25,7 @@ namespace totj3.Models
             this.playerID = AccountState.playerID;
             this.location = AccountState.location;
             this.nickName = AccountState.nickName;
-            this.room = AccountState.room;
+            this.roomID = AccountState.room;
             this.vehicle = AccountState.vehicle;
             this.hat = AccountState.hat;
         }                                
@@ -35,7 +35,7 @@ namespace totj3.Models
             AccountState.playerID = this.playerID;
             AccountState.location = this.location;
             AccountState.nickName = this.nickName;
-            AccountState.room = this.room;
+            AccountState.room = this.roomID;
             AccountState.vehicle = this.vehicle;
             AccountState.hat = this.hat;
         }

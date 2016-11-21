@@ -77,10 +77,47 @@ namespace totj3
                 return JsonConvert.DeserializeObject<Room>(response.Content);
             }
             return new Model();
-
-            //http://94.213.168.52/API/api.php/room?filter[]=name,eq,abc
+            
         }
 
+        public static int[] getPlayers(int roomID)
+        {
+            RestClient customClient = new RestClient();
+            customClient.BaseUrl = new Uri("http://94.213.168.52/API/read.php?table=player&what=playerID&where=roomID=" + roomID);
+
+            defaultRequest = new RestRequest(Method.GET);
+
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+
+            string[] result = response.Content.Split(',');
+            int[] intResult = new int[4];
+            int i = 0;
+            foreach (string res in result)
+            {
+                if(res != ",")
+                {
+                    Int32.TryParse(res, out intResult[i]);
+                }
+            }
+
+            return intResult;
+        }
+
+        public static int getMaxID(string table, string what)
+        {
+            RestClient customClient = new RestClient();
+            customClient.BaseUrl = new Uri("http://94.213.168.52/API/readMaxID.php?table=" + table + "&what=" + what);
+            
+            Console.WriteLine(customClient.BaseUrl);
+
+            RestRequest customRequest = new RestRequest(Method.GET);
+            
+            IRestResponse response = customClient.Execute(customRequest);
+            string result = response.Content;
+
+            int intResult = Int32.Parse(result);
+            return intResult;
+        }
 
         /// <summary>
         /// This is the function to update data in the database.
@@ -107,14 +144,13 @@ namespace totj3
         /// <param name="id">The id you need to acces.</param>
         /// <param name="o">The object that will be send to the database in Json format.</param>
         /// <returns>This returns the id of the created record</returns>
-        public static int Insert(string table, Model o)
+        public static void Insert(string table, Model o)
         {
             defaultRequest = new RestRequest(Method.POST);
             defaultRequest.Resource = table + "/";
             defaultRequest.AddJsonBody(o);
 
             IRestResponse response = defaultClient.Execute(defaultRequest);
-            return JsonConvert.DeserializeObject<int>("1");
         }
 
         /// <summary>
