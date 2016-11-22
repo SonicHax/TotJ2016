@@ -107,8 +107,6 @@ namespace totj3
         {
             RestClient customClient = new RestClient();
             customClient.BaseUrl = new Uri("http://94.213.168.52/API/readMaxID.php?table=" + table + "&what=" + what);
-            
-            Console.WriteLine(customClient.BaseUrl);
 
             RestRequest customRequest = new RestRequest(Method.GET);
             
@@ -144,13 +142,17 @@ namespace totj3
         /// <param name="id">The id you need to acces.</param>
         /// <param name="o">The object that will be send to the database in Json format.</param>
         /// <returns>This returns the id of the created record</returns>
-        public static void Insert(string table, Model o)
+        public static void Insert(string table, string o)
         {
-            defaultRequest = new RestRequest(Method.POST);
-            defaultRequest.Resource = table + "/";
-            defaultRequest.AddJsonBody(o);
+            defaultClient = new RestClient();
+            defaultClient.BaseUrl = new Uri("http://94.213.168.52/API/api.php/");
 
+            defaultRequest = new RestRequest(Method.POST);
+            defaultRequest.Resource = table + o;
+            defaultRequest.AddJsonBody(o);
+            
             IRestResponse response = defaultClient.Execute(defaultRequest);
+            Console.WriteLine(response.Content);
         }
 
         /// <summary>
