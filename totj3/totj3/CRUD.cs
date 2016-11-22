@@ -54,6 +54,20 @@ namespace totj3
             return new Model();
         }
 
+        public static string simpleRequest(string query)
+        {
+            defaultClient = new RestClient();
+            defaultClient.BaseUrl = new Uri("http://94.213.168.52/API/query.php");
+
+            defaultRequest = new RestRequest(Method.GET);
+            defaultRequest.AddParameter("query", query);
+            defaultRequest.AddParameter("seed", "jsBazaWPyMt0I3UgoE7qGBNAhFhaRUiNrpek1nxj");
+
+            IRestResponse response = defaultClient.Execute(defaultRequest);
+            
+            return response.Content;
+        }
+
         /// <summary>
         /// This is function to Get data from the database in List format.
         /// </summary>

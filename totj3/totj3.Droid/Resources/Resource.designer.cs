@@ -126,8 +126,23 @@ namespace totj3.Droid
 			// aapt resource value: 0x7f050015
 			public const int RoomHost_text_error = 2131034133;
 			
+			// aapt resource value: 0x7f05001e
+			public const int RoomJoin_btn_Join = 2131034142;
+			
+			// aapt resource value: 0x7f05001f
+			public const int RoomJoin_btn_back = 2131034143;
+			
+			// aapt resource value: 0x7f05001d
+			public const int RoomJoin_et_roomName = 2131034141;
+			
+			// aapt resource value: 0x7f05001c
+			public const int RoomJoin_text_error = 2131034140;
+			
 			// aapt resource value: 0x7f05001b
-			public const int Start_btn_Play = 2131034139;
+			public const int RoomJoin_text_roomName = 2131034139;
+			
+			// aapt resource value: 0x7f050020
+			public const int Start_btn_Play = 2131034144;
 			
 			// aapt resource value: 0x7f050010
 			public const int radioGroup1 = 2131034128;
@@ -170,7 +185,10 @@ namespace totj3.Droid
 			public const int RoomHost = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Start = 2130903044;
+			public const int RoomJoin = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Start = 2130903045;
 			
 			static Layout()
 			{

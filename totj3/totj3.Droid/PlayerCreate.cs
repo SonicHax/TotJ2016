@@ -35,8 +35,8 @@ namespace totj3.Droid
 
                 Player player = new Player(nickName, vehicle, hat);
 
-                CRUD.Insert("player", "?nickname='" + nickName + "'&hat=1&vehicle=1");
-                player.playerID = CRUD.getMaxID("player", "playerID");
+                CRUD.simpleRequest("INSERT INTO `totj`.`player` (`nickName`, `vehicle`, `hat`) VALUES (" + nickName + "," + vehicle + "," + hat + ")");
+                player.playerID = int.Parse(CRUD.simpleRequest("select max(playerID) from player"));
 
                 player.PlayerToPlayerState();
 
