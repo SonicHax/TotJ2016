@@ -24,6 +24,8 @@ namespace totj3.Droid
             // Create your application here
 
             Button btnHost = FindViewById<Button>(Resource.Id.Main_Btn_Host);
+            Button btnBoardScan = FindViewById<Button>(Resource.Id.Main_Btn_BoardScan);
+            Button btnJoin = FindViewById<Button>(Resource.Id.Main_btn_join);
 
             btnHost.Click += delegate
             {
@@ -35,6 +37,16 @@ namespace totj3.Droid
                 {
                     StartActivity(typeof(PlayerCreate));
                 }
+            };
+
+            btnBoardScan.Click += delegate
+            {
+                StartActivity(typeof(BoardScan));
+            };
+
+            btnJoin.Click += delegate
+            {
+                StartActivity(typeof(RoomJoin));
             };
         }
     }

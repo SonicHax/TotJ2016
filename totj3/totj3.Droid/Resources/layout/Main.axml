@@ -8,4 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Main_Btn_Host" />
+    <Button
+        android:text="BoardScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Main_Btn_BoardScan" />
+    <Button
+        android:text="join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Main_btn_join" />
 </LinearLayout>

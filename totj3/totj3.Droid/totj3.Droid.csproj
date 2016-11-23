@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardScan.cs" />
     <Compile Include="LobbyHost.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainActivity.cs" />
@@ -84,6 +85,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\RoomJoin.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BoardScan.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
