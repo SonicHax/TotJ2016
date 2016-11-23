@@ -57,7 +57,7 @@ namespace totj3.Droid
 
                     room.roomID = Int32.Parse(CRUD.simpleRequest("select max(roomID) as `result` from room"));
                     room.RoomToRoomState();
-                    CRUD.simpleRequest("UPDATE `player` SET `roomID`=['" + room.roomID + "'] WHERE playerID =" + AccountState.playerID + ")");
+                    CRUD.simpleRequest("UPDATE `player` SET `roomID`= " + room.roomID + " WHERE playerID = '" + AccountState.playerID + "'");
                     StartActivity(typeof(LobbyHost));
                 }
             };
