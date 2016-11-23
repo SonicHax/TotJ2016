@@ -20,14 +20,21 @@ namespace totj3.Models
             this.hat = h;
         }
         
-        public Account()
+        public Account(bool b)
         {
-            this.playerID = AccountState.playerID;
-            this.location = AccountState.location;
-            this.nickName = AccountState.nickName;
-            this.roomID = AccountState.room;
-            this.vehicle = AccountState.vehicle;
-            this.hat = AccountState.hat;
+            if (b)
+            {
+                this.playerID = AccountState.playerID;
+                this.location = AccountState.location;
+                this.nickName = AccountState.nickName;
+                this.roomID = AccountState.room;
+                this.vehicle = AccountState.vehicle;
+                this.hat = AccountState.hat;
+            }
+            else
+            {
+                playerID = 0;
+            }
         }                                
                                                      
         public void PlayerToPlayerState()            
@@ -39,5 +46,6 @@ namespace totj3.Models
             AccountState.vehicle = this.vehicle;
             AccountState.hat = this.hat;
         }
+
     }
 }
