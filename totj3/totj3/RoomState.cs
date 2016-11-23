@@ -12,9 +12,9 @@ namespace totj3
         public static string active;
         public static int players;
         public static int host;
-        public static Player p1;
-        public static Player p2;
-        public static Player p3;
-        public static Player p4;
+        public static Account p1;
+        public static Account p2;
+        public static Account p3;
+        public static Account p4;
     }
 }

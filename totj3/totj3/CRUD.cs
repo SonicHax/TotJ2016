@@ -45,7 +45,7 @@ namespace totj3
             IRestResponse response = defaultClient.Execute(defaultRequest);
             if(table == "player")
             {
-                return JsonConvert.DeserializeObject<Player>(response.Content);
+                return JsonConvert.DeserializeObject<Account>(response.Content);
 
             } else if (table == "room")
             {
@@ -61,7 +61,8 @@ namespace totj3
 
             defaultRequest = new RestRequest(Method.GET);
             defaultRequest.AddParameter("query", query);
-            defaultRequest.AddParameter("seed", "jsBazaWPyMt0I3UgoE7qGBNAhFhaRUiNrpek1nxj");
+            defaultRequest.AddParameter("seed", "jsBazaWPyMt0I3UgoRobinKoffie????E7qGBNAhFhaRUiNrpek1nxj");
+            Console.WriteLine(defaultClient.BuildUri(defaultRequest));
 
             IRestResponse response = defaultClient.Execute(defaultRequest);
             
@@ -84,7 +85,7 @@ namespace totj3
             IRestResponse response = defaultClient.Execute(defaultRequest);
             if (table == "player")
             {
-                return JsonConvert.DeserializeObject<Player>(response.Content);
+                return JsonConvert.DeserializeObject<Account>(response.Content);
             }
             else if (table == "room")
             {

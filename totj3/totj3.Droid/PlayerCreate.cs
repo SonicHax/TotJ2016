@@ -33,10 +33,10 @@ namespace totj3.Droid
             {
                 nickName = FindViewById<EditText>(Resource.Id.Player_et_Nickname).Text;
 
-                Player player = new Player(nickName, vehicle, hat);
+                Account player = new Account(nickName, vehicle, hat);
 
-                CRUD.simpleRequest("INSERT INTO `totj`.`player` (`nickName`, `vehicle`, `hat`) VALUES (" + nickName + "," + vehicle + "," + hat + ")");
-                player.playerID = int.Parse(CRUD.simpleRequest("select max(playerID) from player"));
+                CRUD.simpleRequest("INSERT INTO `totj`.`player` (`nickName`, `vehicle`, `hat`) VALUES ('" + nickName + "'," + vehicle + "," + hat + ")");
+                player.playerID = Int32.Parse(CRUD.simpleRequest("select max(playerID) as `result` from player"));
 
                 player.PlayerToPlayerState();
 

@@ -44,38 +44,23 @@ namespace totj3.Droid
             Button btnNext = FindViewById<Button>(Resource.Id.RoomHost_btn_Next);
             EditText nickName = FindViewById<EditText>(Resource.Id.RoomHost_et_RoomName);
             TextView error = FindViewById<TextView>(Resource.Id.RoomHost_text_error);
-            bool createRoom = true;
 
             btnNext.Click += delegate
             {
-                Room rooms = (Room) CRUD.List("room");
-                // Check if name already exists in rooms
-                foreach (Room room in rooms.room)
+                string roomName = CRUD.simpleRequest("select roomID from room where name = '" + nickName.Text + "' and active = 'true'");
+                if (roomName != "TRUE")
                 {
-                    if (room.name == nickName.Text && room.active == "true")
-                    {
-                        error.Text = "Deze kamernaam is al ingebruik";
-                        createRoom = false;
-                    } 
-                    if(room.active == "false")
-                    {
-                        CRUD.Delete("room", room.roomID);
-                    }
-                }
-                if(createRoom == true)
-                {
+                    error.Text = "Deze kamernaam is al ingebruik";
+                } else {
                     Room room = new Room(nickName.Text, "true", selectedPlayers, AccountState.playerID);
-                    //CRUD.Insert("room", room);
-                    room.roomID = CRUD.getMaxID("room", "roomID");
+                    CRUD.simpleRequest("INSERT INTO `totj`.`room` (`roomID`, `name`, `active`, `players`, `host`) VALUES (NULL, '" + nickName.Text + "', 'true', '" + selectedPlayers + "', '" + AccountState.playerID + "');");
+
+                    room.roomID = Int32.Parse(CRUD.simpleRequest("select max(roomID) as `result` from room"));
                     room.RoomToRoomState();
-                    CRUD.Update("player", AccountState.playerID, new Player());
+                    CRUD.simpleRequest("UPDATE `player` SET `roomID`=['" + room.roomID + "'] WHERE playerID =" + AccountState.playerID + ")");
                     StartActivity(typeof(LobbyHost));
                 }
-                createRoom = true;
-
             };
-
-
         }
     }
 }

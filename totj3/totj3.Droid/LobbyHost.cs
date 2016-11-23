@@ -34,6 +34,7 @@ namespace totj3.Droid
             int currentPlayers = 1;
 
             roomName.Text = RoomState.name + " (" + currentPlayers + " / " + RoomState.players + ")";
+            RoomState.p1 = new Models.Account();
             player1.Text = AccountState.nickName;
             if(RoomState.players < 4)
             {
@@ -54,21 +55,34 @@ namespace totj3.Droid
 
             btnStop.Click += delegate
             {
-                /*RoomState.p1.room = 0;
-                RoomState.p2.room = 0;
-                RoomState.p3.room = 0;
-                RoomState.p4.room = 0;
+                if (RoomState.players == 4)
+                {
+                    RoomState.p3.roomID = 0;
+                    RoomState.p4.roomID = 0;
+                }
+                if (RoomState.players == 3)
+                {
+                    RoomState.p3.roomID = 0;
+                }
 
-                CRUD.Delete("room", RoomState.roomID);
+                RoomState.p1.roomID = 0;
+                CRUD.simpleRequest("UPDATE `player` SET `roomID`=[" + RoomState.roomID + "] WHERE playerID =" + RoomState.p1.playerID);
 
-                CRUD.Update("player", RoomState.p1.playerID, RoomState.p1);
-                CRUD.Update("player", RoomState.p2.playerID, RoomState.p2);
-                CRUD.Update("player", RoomState.p3.playerID, RoomState.p3);
-                CRUD.Update("player", RoomState.p4.playerID, RoomState.p4);
-
-                StartActivity(typeof(Main));*/
+                if (RoomState.p2.playerID != 0)
+                {
+                    CRUD.simpleRequest("UPDATE `player` SET `roomID`=[" + RoomState.roomID + "] WHERE playerID =" + RoomState.p2.playerID);
+                }
+                if (RoomState.p3.playerID != 0)
+                {
+                    CRUD.simpleRequest("UPDATE `player` SET `roomID`=[" + RoomState.roomID + "] WHERE playerID =" + RoomState.p3.playerID);
+                }
+                if (RoomState.p4.playerID != 0)
+                {
+                    CRUD.simpleRequest("UPDATE `player` SET `roomID`=[" + RoomState.roomID + "] WHERE playerID =" + RoomState.p4.playerID);
+                }
+                CRUD.simpleRequest("DELETE FROM `totj`.`room` WHERE `room`.`roomID` = " + RoomState.roomID);
+                StartActivity(typeof(Main));
             };
         }
-        
     }
 }

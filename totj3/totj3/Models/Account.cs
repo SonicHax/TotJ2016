@@ -4,7 +4,7 @@ using System.Text;
 
 namespace totj3.Models
 {
-    public class Player : Model
+    public class Account : Model
     {
         public int playerID;
         public string location;
@@ -13,14 +13,14 @@ namespace totj3.Models
         public int vehicle;
         public int hat;
 
-        public Player(string n, int v, int h)
+        public Account(string n, int v, int h)
         {
             this.nickName = n;
             this.vehicle = v;
             this.hat = h;
         }
         
-        public Player()
+        public Account()
         {
             this.playerID = AccountState.playerID;
             this.location = AccountState.location;
