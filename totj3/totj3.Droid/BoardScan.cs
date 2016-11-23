@@ -10,14 +10,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Nfc;
+using totj3.Models;
 
 namespace totj3.Droid
 {
     [Activity(Label = "BoardScan")]
     public class BoardScan : Activity
     {
-        NfcAdapter adapter;
-        PendingIntent pendingIntent;
+        NFCController nfcController;
+        Board board;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,40 +26,31 @@ namespace totj3.Droid
 
             SetContentView(Resource.Layout.BoardScan);
 
-            adapter = NfcAdapter.GetDefaultAdapter(this);
-            if(adapter == null)
-            {
-                //nfc not supported
-                return;
-            }
+            nfcController = new NFCController(this);
 
-            pendingIntent = PendingIntent.GetActivity(this, 0, new Intent(this, this.GetType()).AddFlags(ActivityFlags.SingleTop), 0);
+            board = new Board();
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            adapter.EnableForegroundDispatch(this, pendingIntent, null, null);
+            nfcController.adapter.EnableForegroundDispatch(this, nfcController.pendingIntent, null, null);
         }
 
         protected override void OnPause()
         {
             base.OnPause();
-            if(adapter != null)
+            if(nfcController.adapter != null)
             {
-                adapter.DisableForegroundDispatch(this);
+                nfcController.adapter.DisableForegroundDispatch(this);
             }
         }
 
         protected override void OnNewIntent(Intent intent)
         {
-            getTagInfo(intent);
-        }
-
-        private void getTagInfo(Intent intent)
-        {
-            Tag tag = intent.GetParcelableExtra(NfcAdapter.ExtraTag) as Tag;
-            Toast.MakeText(this, tag.ToString(), ToastLength.Long);
+            string tagInfo = nfcController.getTagInfo(intent);
+            board.tiles.Add(tagInfo);
+            Toast.MakeText(this, tagInfo, ToastLength.Long).Show();
         }
     }
 }

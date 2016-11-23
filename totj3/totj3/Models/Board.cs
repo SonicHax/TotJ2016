@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Content;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,14 +7,12 @@ namespace totj3.Models
 {
     public class Board : Model
     {
-        public int[] tiles;
+        public List<string> tiles;
 
         public Board()
         {
-            tiles = new int[]
-            {
-
-            };
+            tiles = new List<string>();
         }
+
     }
 }
