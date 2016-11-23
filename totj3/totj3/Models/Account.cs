@@ -19,7 +19,9 @@ namespace totj3.Models
             this.vehicle = v;
             this.hat = h;
         }
-        
+
+        public Account() { }
+
         public Account(bool b)
         {
             if (b)

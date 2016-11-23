@@ -12,5 +12,6 @@ namespace totj3
         public static int room;
         public static int vehicle;
         public static int hat;
+        public static bool host;
     }
 }

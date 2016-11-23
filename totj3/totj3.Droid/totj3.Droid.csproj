@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BoardScan.cs" />
     <Compile Include="LobbyHost.cs" />
+    <Compile Include="LobbyJoin.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PlayerCreate.cs" />
@@ -88,6 +89,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\BoardScan.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LobbyJoin.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

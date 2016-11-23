@@ -16,5 +16,6 @@ namespace totj3
         public static Account p2;
         public static Account p3;
         public static Account p4;
+        public static int currentPlayers;
     }
 }

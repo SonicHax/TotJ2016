@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Roomname"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_text_RoomName" />
+    <TextView
+        android:text="P1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_text_p1" />
+    <TextView
+        android:text="P2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_text_p2" />
+    <TextView
+        android:text="P3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_text_p3" />
+    <TextView
+        android:text="P4"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_text_p4" />
+    <Button
+        android:text="Stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LobbyJoin_btn_Stop" />
+</LinearLayout>

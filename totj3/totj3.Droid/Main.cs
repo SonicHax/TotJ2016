@@ -35,6 +35,7 @@ namespace totj3.Droid
                 }
                 else
                 {
+                    AccountState.host = true;
                     StartActivity(typeof(PlayerCreate));
                 }
             };
@@ -46,7 +47,15 @@ namespace totj3.Droid
 
             btnJoin.Click += delegate
             {
-                StartActivity(typeof(RoomJoin));
+                if (AccountState.playerID != 0)
+                {
+                    StartActivity(typeof(RoomJoin));
+                }
+                else
+                {
+                    AccountState.host = false;
+                    StartActivity(typeof(PlayerCreate));
+                }
             };
         }
     }

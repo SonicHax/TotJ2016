@@ -9,6 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Threading;
+
+class TimerExampleState
+{
+    public int counter = 0;
+    public Timer tmr;
+}
 
 namespace totj3.Droid
 {
@@ -30,7 +37,7 @@ namespace totj3.Droid
             TextView player2 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p2);
             TextView player3 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p3);
             TextView player4 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p4);
-
+            
             int currentPlayers = 1;
 
             roomName.Text = RoomState.name + " (" + currentPlayers + " / " + RoomState.players + ")";
@@ -57,6 +64,23 @@ namespace totj3.Droid
 
 
             }
+
+            TimerExampleState s = new TimerExampleState();
+
+            // Create the delegate that invokes methods for the timer.
+            TimerCallback timerDelegate = new TimerCallback(CheckStatus);
+
+            // Create a timer that waits one second, then invokes every second.
+            Timer timer = new Timer(timerDelegate, s, 1000, 1000);
+
+            // Keep a handle to the timer, so it can be disposed.
+            s.tmr = timer;
+
+            // The main thread does nothing until the timer is disposed.
+            while (s.tmr != null)
+                Thread.Sleep(0);
+            Console.WriteLine("Timer example done.");
+        
 
             btnStart.Click += delegate
             {
@@ -113,6 +137,45 @@ namespace totj3.Droid
                 CRUD.simpleRequest("DELETE FROM `totj`.`room` WHERE `room`.`roomID` = " + RoomState.roomID);
                 StartActivity(typeof(Main));
             };
+        }
+
+        static void CheckStatus(Object state)
+        {
+            TimerExampleState s = (TimerExampleState)state;
+            s.counter++;
+
+
+
+            string currentPlayers = CRUD.simpleRequest("SELECT * FROM `player` WHERE roomID = '" + RoomState.roomID + "'");
+            string[] current = currentPlayers.Split('*');
+            RoomState.currentPlayers = current.Length; 
+            switch (current.Length)
+            {
+                case 1:
+                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                    break;
+                case 2:
+                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                    RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                    break;
+                case 3:
+                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                    RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                    RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
+                    break;
+            }
+           /* if (s.counter == 5)
+            {
+                // Shorten the period. Wait 10 seconds to restart the timer.
+                (s.tmr).Change(10000, 100);
+                Console.WriteLine("changed...");
+            }
+            if (s.counter == 10)
+            {
+                Console.WriteLine("disposing of timer...");
+                s.tmr.Dispose();
+                s.tmr = null;
+            }*/
         }
     }
 }

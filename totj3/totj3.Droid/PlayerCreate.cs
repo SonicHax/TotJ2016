@@ -40,8 +40,14 @@ namespace totj3.Droid
 
                 player.PlayerToPlayerState();
 
-                StartActivity(typeof(RoomHost));
-
+                if(AccountState.host == true)
+                {
+                    StartActivity(typeof(RoomHost));
+                }
+                else
+                {
+                    StartActivity(typeof(RoomJoin));
+                }
             };
 
             RadioButton radioHat1 = FindViewById<RadioButton>(Resource.Id.Player_radio_hat1);
