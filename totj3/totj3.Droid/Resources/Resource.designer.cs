@@ -60,6 +60,9 @@ namespace totj3.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050000
+			public const int BoardScan_text_main = 2131034112;
+			
 			// aapt resource value: 0x7f050006
 			public const int LobbyHost_btn_Start = 2131034118;
 			
@@ -167,9 +170,6 @@ namespace totj3.Droid
 			
 			// aapt resource value: 0x7f050029
 			public const int Start_btn_Play = 2131034153;
-			
-			// aapt resource value: 0x7f050000
-			public const int linearLayout1 = 2131034112;
 			
 			// aapt resource value: 0x7f050019
 			public const int radioGroup1 = 2131034137;

@@ -49,8 +49,25 @@ namespace totj3.Droid
         protected override void OnNewIntent(Intent intent)
         {
             string tagInfo = nfcController.getTagInfo(intent);
-            board.tiles.Add(tagInfo);
-            Toast.MakeText(this, tagInfo, ToastLength.Long).Show();
+            this.AddTile(tagInfo);              
+        }
+
+        private void AddTile(string tagInfo)
+        {
+            if(board.layout.Count < 3)
+            {
+                board.layout.Add(tagInfo);
+                TextView mainText = FindViewById<TextView>(Resource.Id.BoardScan_text_main);
+                mainText.Append(tagInfo + "\n");
+            }else if(board.layout.Count == 3)
+            {
+                board.layout.Add(tagInfo);
+                TextView mainText = FindViewById<TextView>(Resource.Id.BoardScan_text_main);
+                mainText.Append(tagInfo + "\n");
+                board.setBoard();
+                Toast.MakeText(this, "HET WERKT", ToastLength.Long).Show();
+            }
+
         }
     }
 }
