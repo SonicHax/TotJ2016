@@ -52,12 +52,12 @@ namespace totj3.Droid
                 {
                     error.Text = "Deze kamernaam is al ingebruik";
                 } else {
-                    Room room = new Room(nickName.Text, "true", selectedPlayers, AccountState.playerID);
-                    CRUD.simpleRequest("INSERT INTO `totj`.`room` (`roomID`, `name`, `active`, `players`, `host`) VALUES (NULL, '" + nickName.Text + "', 'true', '" + selectedPlayers + "', '" + AccountState.playerID + "');");
+                    Room room = new Room(nickName.Text, "true", selectedPlayers, AccountState.accountID);
+                    CRUD.simpleRequest("INSERT INTO `totj`.`room` (`roomID`, `name`, `active`, `players`, `host`) VALUES (NULL, '" + nickName.Text + "', 'true', '" + selectedPlayers + "', '" + AccountState.accountID + "');");
 
                     room.roomID = Int32.Parse(CRUD.simpleRequest("select max(roomID) as `result` from room"));
                     room.RoomToRoomState();
-                    CRUD.simpleRequest("UPDATE `player` SET `roomID`= " + room.roomID + " WHERE playerID = '" + AccountState.playerID + "'");
+                    CRUD.simpleRequest("UPDATE `account` SET `roomID`= " + room.roomID + " WHERE accountID = '" + AccountState.accountID + "'");
                     StartActivity(typeof(LobbyHost));
                 }
             };

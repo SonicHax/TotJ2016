@@ -29,7 +29,7 @@ namespace totj3.Droid
 
             btnHost.Click += delegate
             {
-                if(AccountState.playerID != 0)
+                if(AccountState.accountID != 0)
                 {
                     StartActivity(typeof(RoomHost));
                 }
@@ -47,7 +47,7 @@ namespace totj3.Droid
 
             btnJoin.Click += delegate
             {
-                if (AccountState.playerID != 0)
+                if (AccountState.accountID != 0)
                 {
                     StartActivity(typeof(RoomJoin));
                 }

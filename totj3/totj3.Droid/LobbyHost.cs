@@ -11,12 +11,6 @@ using Android.Views;
 using Android.Widget;
 using System.Threading;
 
-class TimerExampleState
-{
-    public int counter = 0;
-    public Timer tmr;
-}
-
 namespace totj3.Droid
 {
     [Activity(Label = "LobbyHost")]
@@ -40,9 +34,10 @@ namespace totj3.Droid
             
             int currentPlayers = 1;
 
-            roomName.Text = RoomState.name + " (" + currentPlayers + " / " + RoomState.players + ")";
+            roomName.Text = RoomState.name + " (" + RoomState.currentPlayers + " / " + RoomState.players + ")";
             RoomState.p1 = new Models.Account(true);
-            player1.Text = AccountState.nickName;
+            player1.Text = RoomState.p1.nickName;
+
             switch (RoomState.players)
             {
                 case 4:
@@ -64,118 +59,128 @@ namespace totj3.Droid
 
 
             }
+            
+            Thread thread = new Thread(() =>
+            {
+                updateLoop();
+            });
+            thread.Start();
 
-            TimerExampleState s = new TimerExampleState();
-
-            // Create the delegate that invokes methods for the timer.
-            TimerCallback timerDelegate = new TimerCallback(CheckStatus);
-
-            // Create a timer that waits one second, then invokes every second.
-            Timer timer = new Timer(timerDelegate, s, 1000, 1000);
-
-            // Keep a handle to the timer, so it can be disposed.
-            s.tmr = timer;
-
-            // The main thread does nothing until the timer is disposed.
-            while (s.tmr != null)
-                Thread.Sleep(0);
-            Console.WriteLine("Timer example done.");
-        
 
             btnStart.Click += delegate
             {
-                if(currentPlayers == RoomState.players)
+                if(RoomState.currentPlayers == RoomState.players)
                 {
-                    //start game
+                    CRUD.simpleRequest("UPDATE `totj`.`room` SET `started` = 'true' WHERE `room`.`roomID` = " + RoomState.roomID);
+                    thread.Abort();
+                    StartActivity(typeof(Game));
                 }
             };
 
             btnStop.Click += delegate
             {
+                thread.Abort();
                 if (RoomState.players == 4)
                 {
                     RoomState.p3.roomID = 0;
-                    if (RoomState.p3.playerID != 0)
+                    if (RoomState.p3.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p3.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p3.accountID);
                     }
                     RoomState.p2.roomID = 0;
-                    if (RoomState.p2.playerID != 0)
+                    if (RoomState.p2.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p2.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p2.accountID);
                     }
                     RoomState.p4.roomID = 0;
-                    if (RoomState.p2.playerID != 0)
+                    if (RoomState.p2.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p4.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p4.accountID);
                     }
                 }
                 if (RoomState.players == 3)
                 {
                     RoomState.p3.roomID = 0;
-                    if (RoomState.p3.playerID != 0)
+                    if (RoomState.p3.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p3.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p3.accountID);
                     }
                     RoomState.p2.roomID = 0;
-                    if (RoomState.p2.playerID != 0)
+                    if (RoomState.p2.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p2.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p2.accountID);
                     }
                 }
                 if (RoomState.players == 2)
                 {
                     RoomState.p2.roomID = 0;
-                    if (RoomState.p2.playerID != 0)
+                    if (RoomState.p2.accountID != 0)
                     {
-                        CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p2.playerID);
+                        CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p2.accountID);
                     }
                 }
                 RoomState.p1.roomID = 0;
-                CRUD.simpleRequest("UPDATE `player` SET `roomID`=[NULL] WHERE playerID =" + RoomState.p1.playerID);
+                CRUD.simpleRequest("UPDATE `account` SET `roomID`= NULL WHERE accountID =" + RoomState.p1.accountID);
                 
                 CRUD.simpleRequest("DELETE FROM `totj`.`room` WHERE `room`.`roomID` = " + RoomState.roomID);
                 StartActivity(typeof(Main));
             };
         }
 
-        static void CheckStatus(Object state)
+        public void updateLoop()
         {
-            TimerExampleState s = (TimerExampleState)state;
-            s.counter++;
 
+            TextView roomName = FindViewById<TextView>(Resource.Id.LobbyHost_text_RoomName);
 
-
-            string currentPlayers = CRUD.simpleRequest("SELECT * FROM `player` WHERE roomID = '" + RoomState.roomID + "'");
-            string[] current = currentPlayers.Split('*');
-            RoomState.currentPlayers = current.Length; 
-            switch (current.Length)
+            while (RoomState.currentPlayers != RoomState.players)
             {
-                case 1:
-                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
-                    break;
-                case 2:
-                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
-                    RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
-                    break;
-                case 3:
-                    RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
-                    RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
-                    RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
-                    break;
+                string currentPlayers = CRUD.simpleRequest("SELECT * FROM `account` WHERE roomID = '" + RoomState.roomID + "'");
+                string[] current = currentPlayers.Split('*');
+                RoomState.currentPlayers = current.Length;
+                switch (current.Length)
+                {
+                    case 1:
+                        RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                        RoomState.p2 = new Models.Account(false);
+                        RoomState.p3 = new Models.Account(false);
+                        RoomState.p4 = new Models.Account(false);
+                        break;
+                    case 2:
+                        RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                        RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                        RoomState.p3 = new Models.Account(false);
+                        RoomState.p4 = new Models.Account(false);
+                        break;
+                    case 3:
+                        RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                        RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                        RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
+                        RoomState.p4 = new Models.Account(false);
+                        break;
+                    case 4:
+                        RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                        RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                        RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
+                        RoomState.p4 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[3]);
+                        break;
+                }
+
+                RunOnUiThread(() =>
+                {
+                    roomName.Text = RoomState.name + " (" + RoomState.currentPlayers + " / " + RoomState.players + ")";
+
+                    TextView player1 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p1);
+                    player1.Text = RoomState.p1.nickName;
+                    TextView player2 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p2);
+                    player2.Text = RoomState.p2.nickName;
+                    TextView player3 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p3);
+                    player3.Text = RoomState.p3.nickName;
+                    TextView player4 = FindViewById<TextView>(Resource.Id.LobbyHost_text_p4);
+                    player4.Text = RoomState.p4.nickName;
+                });
+
+                Thread.Sleep(2500);
             }
-           /* if (s.counter == 5)
-            {
-                // Shorten the period. Wait 10 seconds to restart the timer.
-                (s.tmr).Change(10000, 100);
-                Console.WriteLine("changed...");
-            }
-            if (s.counter == 10)
-            {
-                Console.WriteLine("disposing of timer...");
-                s.tmr.Dispose();
-                s.tmr = null;
-            }*/
         }
     }
 }

@@ -6,7 +6,7 @@ namespace totj3
 {
     public static class AccountState
     {
-        public static int playerID;
+        public static int accountID;
         public static string location;
         public static string nickName;
         public static int room;

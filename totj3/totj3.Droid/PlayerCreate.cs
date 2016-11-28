@@ -35,8 +35,8 @@ namespace totj3.Droid
 
                 Account player = new Account(nickName, vehicle, hat);
 
-                CRUD.simpleRequest("INSERT INTO `totj`.`player` (`nickName`, `vehicle`, `hat`) VALUES ('" + nickName + "'," + vehicle + "," + hat + ")");
-                player.playerID = Int32.Parse(CRUD.simpleRequest("select max(playerID) as `result` from player"));
+                CRUD.simpleRequest("INSERT INTO `totj`.`account` (`nickName`, `vehicle`, `hat`) VALUES ('" + nickName + "'," + vehicle + "," + hat + ")");
+                player.accountID = Int32.Parse(CRUD.simpleRequest("select max(accountID) as `result` from account"));
 
                 player.PlayerToPlayerState();
 

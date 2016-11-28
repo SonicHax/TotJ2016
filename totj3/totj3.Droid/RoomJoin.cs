@@ -45,7 +45,9 @@ namespace totj3.Droid
 
                         if (room.name != null)
                         {
-                            string currentPlayers = CRUD.simpleRequest("SELECT * FROM `player` WHERE roomID = '" + room.roomID + "'");
+                            room.RoomToRoomState();
+
+                            string currentPlayers = CRUD.simpleRequest("SELECT * FROM `account` WHERE roomID = '" + RoomState.roomID + "'");
                             string[] current = currentPlayers.Split('*');
                             if (current.Length < room.players)
                             {
@@ -63,8 +65,14 @@ namespace totj3.Droid
                                         RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
                                         RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
                                         break;
+                                    case 4:
+                                        RoomState.p1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[0]);
+                                        RoomState.p2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[1]);
+                                        RoomState.p3 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[2]);
+                                        RoomState.p4 = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Account>(current[3]);
+                                        break;
                                 }
-                                CRUD.simpleRequest("UPDATE `player` SET `roomID`= " + room.roomID + " WHERE playerID = '" + AccountState.playerID + "'");
+                                CRUD.simpleRequest("UPDATE `account` SET `roomID` = " + RoomState.roomID + " WHERE accountID = '" + AccountState.accountID + "'");
                                 StartActivity(typeof(LobbyJoin));
                             }
                         }

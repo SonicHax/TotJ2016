@@ -6,7 +6,7 @@ namespace totj3.Models
 {
     public class Account : Model
     {
-        public int playerID;
+        public int accountID;
         public string location;
         public string nickName;
         public int roomID;
@@ -26,7 +26,7 @@ namespace totj3.Models
         {
             if (b)
             {
-                this.playerID = AccountState.playerID;
+                this.accountID = AccountState.accountID;
                 this.location = AccountState.location;
                 this.nickName = AccountState.nickName;
                 this.roomID = AccountState.room;
@@ -35,13 +35,13 @@ namespace totj3.Models
             }
             else
             {
-                playerID = 0;
+                accountID = 0;
             }
         }                                
                                                      
         public void PlayerToPlayerState()            
         {
-            AccountState.playerID = this.playerID;
+            AccountState.accountID = this.accountID;
             AccountState.location = this.location;
             AccountState.nickName = this.nickName;
             AccountState.room = this.roomID;
