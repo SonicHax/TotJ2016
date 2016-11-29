@@ -19,6 +19,8 @@ namespace totj3.Droid
     {
         NFCController nfcController;
         Board board;
+        ImageView[] tiles = new ImageView[30];
+        int counter = 0;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,20 +56,23 @@ namespace totj3.Droid
 
         private void AddTile(string tagInfo)
         {
-            if(board.layout.Count < 3)
+            if(counter < 30)
             {
                 board.layout.Add(tagInfo);
-                TextView mainText = FindViewById<TextView>(Resource.Id.BoardScan_text_main);
-                mainText.Append(tagInfo + "\n");
-            }else if(board.layout.Count == 3)
+                counter += 1;
+                string viewID = "imageView" + counter;
+                int resId = Resources.GetIdentifier(viewID, "id", PackageName);
+
+                ImageView image = FindViewById<ImageView>(resId);
+                image.SetImageResource(Resource.Drawable.Untitled1);
+                
+            }
+            else
             {
-                board.layout.Add(tagInfo);
-                TextView mainText = FindViewById<TextView>(Resource.Id.BoardScan_text_main);
-                mainText.Append(tagInfo + "\n");
-                board.setBoard();
-                Toast.MakeText(this, "HET WERKT", ToastLength.Long).Show();
+                Toast.MakeText(this, "KLAAR!", ToastLength.Long).Show();
             }
 
+               
         }
     }
 }
