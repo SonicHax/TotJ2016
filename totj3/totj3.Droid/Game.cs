@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using totj3.Models;
+
 namespace totj3.Droid
 {
     [Activity(Label = "Game")]
@@ -21,6 +23,14 @@ namespace totj3.Droid
 
             // Create your application here
             SetContentView(Resource.Layout.Game);
+
+            //TODO: Host: bord inscannen
+            //TODO: Rest moet wachten
+
+            // Game start:
+
+            LocalLibrary localGameState = new LocalLibrary();
+            //
         }
     }
 }

@@ -6,7 +6,13 @@ namespace totj3.Models
 {
     class Location
     {
-        int x;
-        int y;
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public Location()
+        {
+
+        }
+
     }
 }

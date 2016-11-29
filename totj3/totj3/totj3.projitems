@@ -14,11 +14,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Board.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Quest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Room.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Tile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Treasure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NFCController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoomState.cs" />
