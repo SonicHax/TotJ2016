@@ -4,11 +4,13 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Event
+    class Quest
     {
-        int eventID;
+        int questID;
+        string type;
         string name;
-        string action;
-        string condition;
+        int requirement;
+        int tile;
+        string result;
     }
 }

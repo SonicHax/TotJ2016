@@ -4,11 +4,10 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Event
+    class Tile
     {
-        int eventID;
-        string name;
-        string action;
-        string condition;
+        int tileID;
+        string type;
+        string NFCTag;
     }
 }

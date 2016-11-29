@@ -6,7 +6,13 @@ namespace totj3.Models
 {
     class Treasure
     {
-        string found;
+        int found;
         Location location;
+
+        public Treasure()
+        {
+            found = 0;
+            location = new Location();
+        }
     }
 }
