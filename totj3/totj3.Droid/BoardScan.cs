@@ -21,6 +21,7 @@ namespace totj3.Droid
         Board board;
         ImageView[] tiles = new ImageView[30];
         int counter = 0;
+        Button btnUndo;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,6 +32,21 @@ namespace totj3.Droid
             nfcController = new NFCController(this);
 
             board = new Board();
+
+            btnUndo = FindViewById<Button>(Resource.Id.BoardScan_Btn_Undo);
+
+            btnUndo.Click += delegate
+            {
+                Undo();
+            };
+
+            for(int i=1; i<=30; i++)
+            {
+                string viewID = "imageView" + i;
+                int resId = Resources.GetIdentifier(viewID, "id", PackageName);
+                ImageView imageView = FindViewById<ImageView>(resId);
+                imageView.SetImageResource(Resource.Drawable.kitten);
+            }
         }
 
         protected override void OnResume()
@@ -59,7 +75,7 @@ namespace totj3.Droid
             if(counter < 30)
             {
                 board.layout.Add(tagInfo);
-                counter += 1;
+                counter++;
                 string viewID = "imageView" + counter;
                 int resId = Resources.GetIdentifier(viewID, "id", PackageName);
 
@@ -70,9 +86,23 @@ namespace totj3.Droid
             else
             {
                 Toast.MakeText(this, "KLAAR!", ToastLength.Long).Show();
-            }
+            }   
+        }
 
-               
+        private void Undo()
+        {
+            if(counter != 0)
+            {
+                int lastIndex = board.layout.Count - 1;
+                board.layout.Remove(board.layout[lastIndex]);
+                counter--;
+
+                string viewID = "imageView" + (counter + 1);
+                int resId = Resources.GetIdentifier(viewID, "id", PackageName);
+
+                ImageView image = FindViewById<ImageView>(resId);
+                image.SetImageResource(Resource.Drawable.kitten);
+            }
         }
     }
 }

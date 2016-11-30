@@ -89,13 +89,13 @@
     <AndroidResource Include="Resources\layout\RoomJoin.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\BoardScan.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\LobbyJoin.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Game.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BoardScan.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -110,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Untitled1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\kitten.jpg" />
   </ItemGroup>
   <Import Project="..\totj3\totj3.projitems" Label="Shared" Condition="Exists('..\totj3\totj3.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
