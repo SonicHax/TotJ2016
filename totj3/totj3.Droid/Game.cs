@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using Android.App;
 using Android.Content;
@@ -17,6 +18,7 @@ namespace totj3.Droid
     [Activity(Label = "Game")]
     public class Game : Activity
     {
+        public bool started = false;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,9 +30,31 @@ namespace totj3.Droid
             //TODO: Rest moet wachten
 
             // Game start:
-
+            Thread thread = new Thread(() =>
+            {
+                updateLoop();
+            });
+            thread.Start();
             LocalLibrary localGameState = new LocalLibrary();
-            //
+        }
+
+        public void updateLoop()
+        {
+            if (!started)
+            {
+                Board check = Newtonsoft.Json.JsonConvert.DeserializeObject<Board>(CRUD.simpleRequest("Select * from board where roomID = " + RoomState.roomID));
+                LocalLibrary localGameState = new LocalLibrary();
+            }
+            else
+            {
+                Board check = Newtonsoft.Json.JsonConvert.DeserializeObject<Board>(CRUD.simpleRequest("Select * from board where roomID = " + RoomState.roomID));
+                if()
+            }
+            if (check != "TRUE")
+            {
+
+            }
+
         }
     }
 }

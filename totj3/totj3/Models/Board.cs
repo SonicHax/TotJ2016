@@ -8,7 +8,12 @@ namespace totj3.Models
 {
     public class Board : Model
     {
+        public int boardID;
+        public string active;
+        public int roomID;
         public List<string> layout;
+        public GameState gamestate;
+        public int turn;
 
         public Board()
         {

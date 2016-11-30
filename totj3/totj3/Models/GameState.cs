@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace totj3.Models
 {
-    class GameState
+    public class GameState
     {
         public int currentTurn;
         public Player[] players;
@@ -16,27 +16,26 @@ namespace totj3.Models
         public GameState(bool t)
         {
             currentTurn = 1;
-
             // Host
             if (t)
             {
-
+                submitGameState();
             }
             // Join
             else
             {
-
+                getGameState();
             }           
         }
 
         public void submitGameState()
         {
-            CRUD.simpleRequest("UPDATE `totj`.`game` SET `Gamestate` = '" + JsonConvert.SerializeObject(this) + "' where roomID = " + RoomState.roomID);
+            CRUD.simpleRequest("UPDATE `totj`.`board` SET `Gamestate` = '" + JsonConvert.SerializeObject(this) + "' where roomID = " + RoomState.roomID);
         }
 
         public GameState getGameState()
         {
-            return JsonConvert.DeserializeObject<GameState>(CRUD.simpleRequest("select Gamestate from game where roomID = " + RoomState.roomID));
+            return JsonConvert.DeserializeObject<GameState>(CRUD.simpleRequest("select Gamestate from board where roomID = " + RoomState.roomID));
         }
     }
 }
