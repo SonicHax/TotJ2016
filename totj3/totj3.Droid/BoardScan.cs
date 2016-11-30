@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Nfc;
 using totj3.Models;
+using Newtonsoft.Json;
 
 namespace totj3.Droid
 {
@@ -22,22 +23,40 @@ namespace totj3.Droid
         ImageView[] tiles = new ImageView[30];
         int counter = 0;
         Button btnUndo;
+        Button btnNext;
+        CheckBox checkPreset;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.BoardScan);
 
             nfcController = new NFCController(this);
-
             board = new Board();
 
             btnUndo = FindViewById<Button>(Resource.Id.BoardScan_Btn_Undo);
+            btnNext = FindViewById<Button>(Resource.Id.BoarScan_Btn_Next);
+            checkPreset = FindViewById<CheckBox>(Resource.Id.BoardScan_Checbox_Preset);
+
+            checkPreset.CheckedChange += delegate
+            {
+                if(btnNext.Enabled == false)
+                {
+                    btnNext.Enabled = true;
+                }else
+                {
+                    btnNext.Enabled = false;
+                }
+            };
 
             btnUndo.Click += delegate
             {
                 Undo();
+            };
+
+            btnNext.Click += delegate
+            {
+                onNext();
             };
 
             for(int i=1; i<=30; i++)
@@ -85,7 +104,7 @@ namespace totj3.Droid
             }
             else
             {
-                Button btnNext = FindViewById<Button>(Resource.Id.BoarScan_Btn_Next);
+                btnNext.Enabled = true;
             }   
         }
 
@@ -103,6 +122,28 @@ namespace totj3.Droid
                 ImageView image = FindViewById<ImageView>(resId);
                 image.SetImageResource(Resource.Drawable.kitten);
             }
+        }
+
+        private void onNext()
+        {
+            CRUD.simpleRequest("UPDATE `totj`.`room` SET `started` = 'true' WHERE `room`.`roomID` = " + RoomState.roomID);
+            string jsonLayout;
+
+            if (checkPreset.Checked)
+            {
+                jsonLayout = "['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23'"
+                     + ",'24','25','26','27','28','29','30']";
+
+            }else
+            {
+                jsonLayout = JsonConvert.SerializeObject(board.layout, Formatting.None);
+            }
+            
+            string query = "INSERT INTO `totj`.`board` (`boardID`, `active`, `roomID`, `layout`) VALUES(NULL, 'true', '1', '" + jsonLayout + "')";
+
+            CRUD.simpleRequest(query);
+
+            
         }
     }
 }

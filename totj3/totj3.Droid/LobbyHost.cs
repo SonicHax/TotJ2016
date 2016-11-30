@@ -71,9 +71,8 @@ namespace totj3.Droid
             {
                 if(RoomState.currentPlayers == RoomState.players)
                 {
-                    CRUD.simpleRequest("UPDATE `totj`.`room` SET `started` = 'true' WHERE `room`.`roomID` = " + RoomState.roomID);
                     thread.Abort();
-                    StartActivity(typeof(Game));
+                    StartActivity(typeof(BoardScan));
                 }
             };
 

@@ -22,10 +22,7 @@ namespace totj3.Models
 
         public void setBoard()
         {
-            string jsonLayout = JsonConvert.SerializeObject(layout, Formatting.None);
-            string query = "INSERT INTO `totj`.`board` (`boardID`, `active`, `roomID`, `layout`) VALUES(NULL, 'true', '1', '"+ jsonLayout + "')";
 
-            CRUD.simpleRequest(query);
         }
     }
 }
