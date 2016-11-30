@@ -4,7 +4,7 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Player
+    public class Player
     {
         public int accountID;
         public Location location;

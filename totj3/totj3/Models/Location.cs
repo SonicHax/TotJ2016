@@ -4,7 +4,7 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Location
+    public class Location
     {
         public int x { get; set; }
         public int y { get; set; }

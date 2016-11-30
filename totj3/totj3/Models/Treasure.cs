@@ -4,10 +4,10 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Treasure
+    public class Treasure
     {
-        int found;
-        Location location;
+        public int found;
+        public Location location;
 
         public Treasure()
         {
