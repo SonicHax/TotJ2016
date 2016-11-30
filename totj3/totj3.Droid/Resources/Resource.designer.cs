@@ -48,7 +48,10 @@ namespace totj3.Droid
 			public const int Icon = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Untitled1 = 2130837505;
+			public const int kitten = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Untitled1 = 2130837506;
 			
 			static Drawable()
 			{
@@ -63,113 +66,116 @@ namespace totj3.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050024
-			public const int LobbyHost_btn_Start = 2131034148;
+			// aapt resource value: 0x7f05001f
+			public const int BoardScan_Btn_Undo = 2131034143;
 			
 			// aapt resource value: 0x7f050025
-			public const int LobbyHost_btn_Stop = 2131034149;
-			
-			// aapt resource value: 0x7f05001f
-			public const int LobbyHost_text_RoomName = 2131034143;
-			
-			// aapt resource value: 0x7f050020
-			public const int LobbyHost_text_p1 = 2131034144;
-			
-			// aapt resource value: 0x7f050021
-			public const int LobbyHost_text_p2 = 2131034145;
-			
-			// aapt resource value: 0x7f050022
-			public const int LobbyHost_text_p3 = 2131034146;
-			
-			// aapt resource value: 0x7f050023
-			public const int LobbyHost_text_p4 = 2131034147;
-			
-			// aapt resource value: 0x7f05002b
-			public const int LobbyJoin_btn_Stop = 2131034155;
+			public const int LobbyHost_btn_Start = 2131034149;
 			
 			// aapt resource value: 0x7f050026
-			public const int LobbyJoin_text_RoomName = 2131034150;
+			public const int LobbyHost_btn_Stop = 2131034150;
 			
-			// aapt resource value: 0x7f050027
-			public const int LobbyJoin_text_p1 = 2131034151;
+			// aapt resource value: 0x7f050020
+			public const int LobbyHost_text_RoomName = 2131034144;
 			
-			// aapt resource value: 0x7f050028
-			public const int LobbyJoin_text_p2 = 2131034152;
+			// aapt resource value: 0x7f050021
+			public const int LobbyHost_text_p1 = 2131034145;
 			
-			// aapt resource value: 0x7f050029
-			public const int LobbyJoin_text_p3 = 2131034153;
+			// aapt resource value: 0x7f050022
+			public const int LobbyHost_text_p2 = 2131034146;
 			
-			// aapt resource value: 0x7f05002a
-			public const int LobbyJoin_text_p4 = 2131034154;
+			// aapt resource value: 0x7f050023
+			public const int LobbyHost_text_p3 = 2131034147;
 			
-			// aapt resource value: 0x7f05002d
-			public const int Main_Btn_BoardScan = 2131034157;
+			// aapt resource value: 0x7f050024
+			public const int LobbyHost_text_p4 = 2131034148;
 			
 			// aapt resource value: 0x7f05002c
-			public const int Main_Btn_Host = 2131034156;
+			public const int LobbyJoin_btn_Stop = 2131034156;
+			
+			// aapt resource value: 0x7f050027
+			public const int LobbyJoin_text_RoomName = 2131034151;
+			
+			// aapt resource value: 0x7f050028
+			public const int LobbyJoin_text_p1 = 2131034152;
+			
+			// aapt resource value: 0x7f050029
+			public const int LobbyJoin_text_p2 = 2131034153;
+			
+			// aapt resource value: 0x7f05002a
+			public const int LobbyJoin_text_p3 = 2131034154;
+			
+			// aapt resource value: 0x7f05002b
+			public const int LobbyJoin_text_p4 = 2131034155;
 			
 			// aapt resource value: 0x7f05002e
-			public const int Main_btn_join = 2131034158;
+			public const int Main_Btn_BoardScan = 2131034158;
 			
-			// aapt resource value: 0x7f05003b
-			public const int Player_btn_Next = 2131034171;
+			// aapt resource value: 0x7f05002d
+			public const int Main_Btn_Host = 2131034157;
 			
-			// aapt resource value: 0x7f050030
-			public const int Player_et_Nickname = 2131034160;
-			
-			// aapt resource value: 0x7f050033
-			public const int Player_radio_hat1 = 2131034163;
-			
-			// aapt resource value: 0x7f050034
-			public const int Player_radio_hat2 = 2131034164;
-			
-			// aapt resource value: 0x7f050035
-			public const int Player_radio_hat3 = 2131034165;
-			
-			// aapt resource value: 0x7f050038
-			public const int Player_radio_vehicle1 = 2131034168;
-			
-			// aapt resource value: 0x7f050039
-			public const int Player_radio_vehicle2 = 2131034169;
-			
-			// aapt resource value: 0x7f05003a
-			public const int Player_radio_vehicle3 = 2131034170;
-			
-			// aapt resource value: 0x7f050041
-			public const int RoomHost_btn_Next = 2131034177;
-			
-			// aapt resource value: 0x7f05003d
-			public const int RoomHost_et_RoomName = 2131034173;
-			
-			// aapt resource value: 0x7f05003e
-			public const int RoomHost_radio2 = 2131034174;
-			
-			// aapt resource value: 0x7f05003f
-			public const int RoomHost_radio3 = 2131034175;
-			
-			// aapt resource value: 0x7f050040
-			public const int RoomHost_radio4 = 2131034176;
+			// aapt resource value: 0x7f05002f
+			public const int Main_btn_join = 2131034159;
 			
 			// aapt resource value: 0x7f05003c
-			public const int RoomHost_text_error = 2131034172;
+			public const int Player_btn_Next = 2131034172;
 			
-			// aapt resource value: 0x7f050045
-			public const int RoomJoin_btn_Join = 2131034181;
+			// aapt resource value: 0x7f050031
+			public const int Player_et_Nickname = 2131034161;
 			
-			// aapt resource value: 0x7f050046
-			public const int RoomJoin_btn_back = 2131034182;
+			// aapt resource value: 0x7f050034
+			public const int Player_radio_hat1 = 2131034164;
 			
-			// aapt resource value: 0x7f050044
-			public const int RoomJoin_et_roomName = 2131034180;
+			// aapt resource value: 0x7f050035
+			public const int Player_radio_hat2 = 2131034165;
 			
-			// aapt resource value: 0x7f050043
-			public const int RoomJoin_text_error = 2131034179;
+			// aapt resource value: 0x7f050036
+			public const int Player_radio_hat3 = 2131034166;
+			
+			// aapt resource value: 0x7f050039
+			public const int Player_radio_vehicle1 = 2131034169;
+			
+			// aapt resource value: 0x7f05003a
+			public const int Player_radio_vehicle2 = 2131034170;
+			
+			// aapt resource value: 0x7f05003b
+			public const int Player_radio_vehicle3 = 2131034171;
 			
 			// aapt resource value: 0x7f050042
-			public const int RoomJoin_text_roomName = 2131034178;
+			public const int RoomHost_btn_Next = 2131034178;
+			
+			// aapt resource value: 0x7f05003e
+			public const int RoomHost_et_RoomName = 2131034174;
+			
+			// aapt resource value: 0x7f05003f
+			public const int RoomHost_radio2 = 2131034175;
+			
+			// aapt resource value: 0x7f050040
+			public const int RoomHost_radio3 = 2131034176;
+			
+			// aapt resource value: 0x7f050041
+			public const int RoomHost_radio4 = 2131034177;
+			
+			// aapt resource value: 0x7f05003d
+			public const int RoomHost_text_error = 2131034173;
+			
+			// aapt resource value: 0x7f050046
+			public const int RoomJoin_btn_Join = 2131034182;
 			
 			// aapt resource value: 0x7f050047
-			public const int Start_btn_Play = 2131034183;
+			public const int RoomJoin_btn_back = 2131034183;
+			
+			// aapt resource value: 0x7f050045
+			public const int RoomJoin_et_roomName = 2131034181;
+			
+			// aapt resource value: 0x7f050044
+			public const int RoomJoin_text_error = 2131034180;
+			
+			// aapt resource value: 0x7f050043
+			public const int RoomJoin_text_roomName = 2131034179;
+			
+			// aapt resource value: 0x7f050048
+			public const int Start_btn_Play = 2131034184;
 			
 			// aapt resource value: 0x7f050000
 			public const int gridLayout1 = 2131034112;
@@ -264,20 +270,20 @@ namespace totj3.Droid
 			// aapt resource value: 0x7f050009
 			public const int imageView9 = 2131034121;
 			
-			// aapt resource value: 0x7f050037
-			public const int radioGroup1 = 2131034167;
+			// aapt resource value: 0x7f050038
+			public const int radioGroup1 = 2131034168;
+			
+			// aapt resource value: 0x7f050033
+			public const int radioGroup2 = 2131034163;
 			
 			// aapt resource value: 0x7f050032
-			public const int radioGroup2 = 2131034162;
+			public const int textView1 = 2131034162;
 			
-			// aapt resource value: 0x7f050031
-			public const int textView1 = 2131034161;
+			// aapt resource value: 0x7f050037
+			public const int textView2 = 2131034167;
 			
-			// aapt resource value: 0x7f050036
-			public const int textView2 = 2131034166;
-			
-			// aapt resource value: 0x7f05002f
-			public const int textView3 = 2131034159;
+			// aapt resource value: 0x7f050030
+			public const int textView3 = 2131034160;
 			
 			static Id()
 			{
