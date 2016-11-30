@@ -85,7 +85,7 @@ namespace totj3.Droid
             }
             else
             {
-                Toast.MakeText(this, "KLAAR!", ToastLength.Long).Show();
+                Button btnNext = FindViewById<Button>(Resource.Id.BoarScan_Btn_Next);
             }   
         }
 

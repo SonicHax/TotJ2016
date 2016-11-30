@@ -168,4 +168,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/BoardScan_Btn_Undo" />
+    <CheckBox
+        android:text="Preset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BoardScan_Checbox_Preset" />
+    <Button
+        android:text="Next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BoarScan_Btn_Next"
+        android:enabled="false" />
 </LinearLayout>
