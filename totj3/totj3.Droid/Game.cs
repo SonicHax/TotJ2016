@@ -48,11 +48,7 @@ namespace totj3.Droid
             else
             {
                 Board check = Newtonsoft.Json.JsonConvert.DeserializeObject<Board>(CRUD.simpleRequest("Select * from board where roomID = " + RoomState.roomID));
-                if()
-            }
-            if (check != "TRUE")
-            {
-
+                
             }
 
         }

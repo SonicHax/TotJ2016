@@ -4,10 +4,10 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Tile
+    public class Tile
     {
-        int tileID;
-        string type;
-        string NFCTag;
+        public int tileID;
+        public string type;
+        public string NFCTag;
     }
 }

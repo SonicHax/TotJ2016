@@ -4,11 +4,11 @@ using System.Text;
 
 namespace totj3.Models
 {
-    class Event
+    public class Event
     {
-        int eventID;
-        string name;
-        string action;
-        string condition;
+        public int eventID;
+        public string name;
+        public string action;
+        public string condition;
     }
 }
