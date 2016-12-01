@@ -100,12 +100,12 @@ namespace totj3.Droid
 
                 ImageView image = FindViewById<ImageView>(resId);
                 image.SetImageResource(Resource.Drawable.Untitled1);
-                
+
+                if(counter == 30)
+                {
+                    btnNext.Enabled = true;
+                }   
             }
-            else
-            {
-                btnNext.Enabled = true;
-            }   
         }
 
         private void Undo()
@@ -128,22 +128,26 @@ namespace totj3.Droid
         {
             CRUD.simpleRequest("UPDATE `totj`.`room` SET `started` = 'true' WHERE `room`.`roomID` = " + RoomState.roomID);
             string jsonLayout;
+            string query;
 
             if (checkPreset.Checked)
             {
                 jsonLayout = "['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23'"
                      + ",'24','25','26','27','28','29','30']";
 
-            }else
+                query = "INSERT INTO `totj`.`board` (`active`, `roomID`, `layout`) VALUES('true', 1, \"" + jsonLayout + "\")";
+            }
+            else
             {
                 jsonLayout = JsonConvert.SerializeObject(board.layout, Formatting.None);
+
+                query = "INSERT INTO `totj`.`board` (`active`, `roomID`, `layout`) VALUES('true', 1,'" + jsonLayout + "')";
             }
-            
-            string query = "INSERT INTO `totj`.`board` (`boardID`, `active`, `roomID`, `layout`) VALUES(NULL, 'true', '1', '" + jsonLayout + "')";
+
 
             CRUD.simpleRequest(query);
 
-            
+            StartActivity(typeof(Game));
         }
     }
 }

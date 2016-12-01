@@ -19,10 +19,5 @@ namespace totj3.Models
         {
             layout = new List<string>();
         }
-
-        public void setBoard()
-        {
-
-        }
     }
 }
